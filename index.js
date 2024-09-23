@@ -53,13 +53,24 @@ function initGame() {
     cardElement.classList.add('card');
     cardElement.dataset.name = card.name;
     
-    // Card inner structure with front and back
-    cardElement.innerHTML = `
-      <div class="front"></div>
-      <div class="back">
-        <img src="${card.img}" alt="${card.name}">
-      </div>
-    `;
+const frontDiv = document.createElement('div');
+frontDiv.classList.add('front');
+
+const backDiv = document.createElement('div');
+backDiv.classList.add('back');
+
+// Create the img element
+const imgElement = document.createElement('img');
+imgElement.src = card.img; 
+imgElement.alt = card.name; 
+
+// Append the img to the back div
+backDiv.appendChild(imgElement);
+
+// Clear the cardElement    
+cardElement.textContent = '';  
+cardElement.appendChild(frontDiv);
+cardElement.appendChild(backDiv);
 
     cardElement.addEventListener('click', flipCard);
     gameBoard.appendChild(cardElement);
